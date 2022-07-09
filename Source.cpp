@@ -2,7 +2,10 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "Center_of_Accident");
+
+	const unsigned int windov_width = 200;
+	const unsigned int windov_height = 200;
+	sf::RenderWindow window(sf::VideoMode(windov_width,windov_height), "Center_of_Accident");
 
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
