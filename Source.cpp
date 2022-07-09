@@ -1,35 +1,9 @@
-#include <SFML/Graphics.hpp>
+#include "Game.h"
 
 int main()
 {
+	Game Cyber_Game;
+	Cyber_Game.Run();
 
-	const unsigned int windov_width = 200;
-	const unsigned int windov_height = 200;
-	sf::RenderWindow window(sf::VideoMode(windov_width,windov_height), "Center_of_Accident");
-
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-
-
-
-
-	while (window.isOpen())
-	{
-		sf::Event event;
-
-
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
-
-
-
-		window.clear();
-		window.draw(shape);
-		window.display();
-	}
-
-	return 0;
+	 return 0;
 }
