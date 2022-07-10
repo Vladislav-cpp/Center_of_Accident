@@ -41,13 +41,13 @@
     <ClInclude Include="Player.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Ufo.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Dust.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Ufo.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

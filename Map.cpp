@@ -1,20 +1,24 @@
 #include "Map.h"
 
 
-Map::Map() :window(sf::VideoMode(windov_width, windov_height), "Center_of_Accident"), shape(100.f)
+Map::Map() :window(sf::VideoMode(windov_width, windov_height), "Center_of_Accident")
 {
-	//Image_map.loadFromFile("F:\VS\Center_of_Accident\Image\clouds2.1Large.png");
-	//Texture_map.loadFromImage(Image_map);
-	//Sprite_map.setTexture(Texture_map);
+	//Image_map.loadFrom("Center_of_Accident\Image\clouds2.1Large.png");
+	Texture_map.loadFromFile("Images\\cloudsLarge1.png");
+	Sprite_map.setTexture(Texture_map);
 
-	shape.setFillColor(sf::Color::Green);
+	Sprite_map.setTextureRect(sf::IntRect(0, 0, 800, 800));
+	Sprite_map.setPosition(0,0);
+
+	
 }
 
-void Map::Draw()
+void Map::Draw(sf::Sprite Ob)
 {
 
 	window.clear();
-	window.draw(shape);
+	window.draw(Sprite_map);
+	window.draw(Ob);
 	window.display();
 }
 
