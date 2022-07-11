@@ -13,12 +13,13 @@ Map::Map() :window(sf::VideoMode(windov_width, windov_height), "Center_of_Accide
 	
 }
 
-void Map::Draw(sf::Sprite Ob)
+void Map::Draw(sf::Sprite Ob1, sf::Sprite Ob2)
 {
 
 	window.clear();
 	window.draw(Sprite_map);
-	window.draw(Ob);
+	window.draw(Ob1);
+	window.draw(Ob2);
 	window.display();
 }
 

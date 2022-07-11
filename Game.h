@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Ufo.h"
+#include "Dust.h"
 #include "Map.h"
 
 

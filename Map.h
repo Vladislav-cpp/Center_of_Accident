@@ -15,7 +15,7 @@ private:
 
 public:
 	Map();
-	void Draw(sf::Sprite);
+	void Draw(sf::Sprite, sf::Sprite);
 };
 
 

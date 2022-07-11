@@ -9,11 +9,11 @@ Game::Game()
 void Game::Run()
 {
 	Ufo our_character;
-	
+	Dust enemy;
 
 	while (Game_State)
 	{
-		map.Draw(our_character.Get_Sprite());
+		map.Draw(our_character.Get_Sprite(), enemy.Get_Sprite());
 		 
 		//while (window.pollEvent(event))
 		//{
