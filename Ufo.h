@@ -7,7 +7,7 @@ class Ufo :public Player
 public:
 	Ufo();
 	virtual void shot();
-	virtual void movement(float destination_x, float destination_y);
+	virtual void movement(float destination_x, float destination_y, float);
 	//sf::Sprite Get_Sprite()const;
 private:
 	

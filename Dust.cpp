@@ -10,22 +10,24 @@ void Dust::shot()
 {
 }
 
-void Dust::movement(float destination_x, float destination_y)
+void Dust::movement(float destination_x, float destination_y, float time)
 {
 	float distance = sqrt( (destination_x - position_X) * (destination_x - position_X) +
 		                (destination_y - position_Y) * (destination_y - position_X) );
 
-	const int step = 10;
+	//const int step = 10;
 
-	while(position_X<= (destination_x-20) || position_X >= (destination_x + 20))
-	{
+	/*while(position_X<= (destination_x-20) || position_X >= (destination_x + 20))
+	{*/
+
+	if (   !(position_X <= (destination_x - 20) || position_X >= (destination_x + 20)) ) return; 
 	std::cout << position_X<< "\n";
 	std::cout << destination_x << "\n";
 
-	position_X += step*(destination_x - position_X)/ distance;
-	position_Y += step *(destination_y - position_Y)/ distance;
+	position_X += time * ( destination_x - position_X ) / distance;
+	position_Y += time * ( destination_y - position_Y ) / distance;
 
 	Sprite_Player.setPosition(sf::Vector2f(position_X, position_Y));
 
-    }
+    //}
 }

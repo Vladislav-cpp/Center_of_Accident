@@ -8,7 +8,7 @@ public:
 	Player(const char* file_name, int rectLeft, int rectTop, int rectWidth, int rectHeight, float posX, float posY, float Xp);
 
 	virtual void shot() = 0;
-	virtual void movement(float , float) = 0;
+	virtual void movement(float , float, float) = 0;
 
 	sf::Sprite Get_Sprite()const;
 	//float Get_posX() const { return position_X;}

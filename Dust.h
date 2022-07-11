@@ -8,7 +8,7 @@ class Dust :public Player
 public:
 	Dust();
 	virtual void shot();
-	virtual void movement(float destination_x, float destination_y);
+	virtual void movement(float destination_x, float destination_y, float time);
 	//sf::Sprite Get_Sprite()const;
 private:
 
