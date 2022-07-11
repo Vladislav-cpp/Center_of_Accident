@@ -3,6 +3,7 @@
 #include "Ufo.h"
 #include "Dust.h"
 #include "Map.h"
+#include <iostream>
 
 
 class Game

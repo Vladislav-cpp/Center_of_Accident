@@ -1,7 +1,7 @@
 #include "Player.h"
 
 Player::Player(const char* file_name, int rectLeft, int rectTop, int rectWidth, int rectHeight, float posX, float posY, float Xp)
-	:Xp()
+	:Xp(Xp), position_X(posX), position_Y(posY)
 {
 	Texture_Player.loadFromFile(file_name);
 	Sprite_Player.setTexture(Texture_Player);
@@ -14,3 +14,4 @@ sf::Sprite Player::Get_Sprite() const
 {
 	return Sprite_Player;
 }
+

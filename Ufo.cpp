@@ -9,7 +9,7 @@ void Ufo::shot()
 {
 }
 
-void Ufo::movement()
+void Ufo::movement(float destination_x, float destination_y)
 {
 }
 
