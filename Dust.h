@@ -1,16 +1,18 @@
 #pragma once
-#include "Player.h"
-#include <iostream>
+#include "Object.h"
+//#include <iostream>
 
 
-class Dust :public Player
+class Dust :public Object
 {
 public:
 	Dust();
 	virtual void shot();
-	virtual void movement(float destination_x, float destination_y, float time);
-	//sf::Sprite Get_Sprite()const;
+	virtual void movement();
+	
 private:
 
+	float destination_x = 400;
+	float destination_y = 400;
 
 };

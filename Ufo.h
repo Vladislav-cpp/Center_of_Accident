@@ -1,14 +1,13 @@
 #pragma once
-#include "Player.h"
+#include "Object.h"
 
 
-class Ufo :public Player
+class Ufo :public Object
 {
 public:
 	Ufo();
 	virtual void shot();
-	virtual void movement(float destination_x, float destination_y, float);
-	//sf::Sprite Get_Sprite()const;
+	virtual void movement();
 private:
 	
 	
