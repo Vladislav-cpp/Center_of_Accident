@@ -20,28 +20,28 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 	int x;
 	int y;
 
-	for (int i = 0; i < number_opponents;i++)
+
+    //створення обєктив класа Dust в рандомних позиціях по окружності
+	for (int i = 0; i < number_opponents;i++)	
 	{
 
 			R = rand() % 360;
-		//R = 90;
-			//std::cout << R << std::endl;
-			std::cout << "x" << 400 + 400 * cos(R * PI / 180) << std::endl;
-			std::cout << "y"<< 400 + 400 * sin(R * PI / 180) << std::endl << std::endl;
+
+			//std::cout << "x" << 400 + 400 * cos(R * PI / 180) << std::endl;
+			//std::cout << "y"<< 400 + 400 * sin(R * PI / 180) << std::endl << std::endl;
+
 			x = 400 + 400 * cos(R * PI / 180);
 			y = 400 + 400 * sin(R * PI / 180);
 
-					Dust* d = new Dust(TDust, 0, 0, 151, 134, 151, 4, x, y);
-					//Dust* d = new Dust(TDust, 0, 0, 151, 134, 151, 4, x - 80 / 2, y - 60 / 2);
-					object.push_back(d);
-
+			Dust* d = new Dust(TDust, 0, 0, 151, 134, 151, 4, x, y);
+			object.push_back(d);
 
 	}
 
 
-
-	//Ufo* u = new Ufo(TUfo, 2, 2, 97, 97, 100, 20, 354, 354);
-	//object.push_back(u);
+	//створення обєкта класа Ufo в центрі вікна 
+	Ufo* u = new Ufo(TUfo, 2, 2, 97, 97, 100, 20, 354, 354);
+	object.push_back(u);
 
 }
 
@@ -55,40 +55,60 @@ void Game::Run()
 	//sf::Clock clock;
 
 
+	
+		
+
+
 	while (1)
 	{
 
-		//std::cout << "45" << "\n";
-		for (auto i = object.begin(); i != object.end();)
-		{
-			Object* e = *i;
 
-			e->movement();
-			i++;
-		}
+		//якщо нажата мишка і обєкт під мишкою (Dust) то видалити його 
+		//if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		//{
 
-		//std::cout << "53" << "\n";
+		//	std::cout << "sf::Mouse::isButtonPressed(sf::Mouse::Left)\n";
+
+		//	sf::Vector2i position = sf::Mouse::getPosition(window);
+
+		//	
+		//	for (auto i = object.begin(); i != object.end();)
+
+  //          {
+  //          	Object* e = *i;
+		//		if (e->name == "Dust")
+		//		{
+		//			if(e->collision(position.x, position.y))
+		//				std::cout << "collision " << position.x << " " << position.y << " position\n\n";
+		//		}
+  //          	i++;
+  //          }
+
+		//}
+
+
+		//визов фун-члена усіх обєктив які є в листі
+		 
+		//for (auto i = object.begin(); i != object.end();)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//{
+		//	Object* e = *i;
+		//	e->movement();
+		//	i++;
+		//}
+
 
 		window.clear();
 		window.draw(Sprite_map);
 
+		//отрисовка всіх обєктів які є в листі
 		for (auto i : object) 
 		{
 			i->animation();
 			i->draw(window);
-			
         }
+		
 		window.display();
-		//std::cout << "61" << "\n";
-
-
-
-
-
-
-
-
-
+		
 			//float time = clock.getElapsedTime().asMicroseconds();
 			//time /= 5000;
 	       // clock.restart();

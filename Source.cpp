@@ -1,4 +1,6 @@
 #include <ctime>
+#include <SFML/Graphics.hpp>
+#include <iostream>
 #include "Game.h"
 //#include <iostream>
 //#include <SFML/Graphics.hpp>
@@ -14,16 +16,7 @@ std::srand(time(NULL));
 
 
 	
-	//int R = rand() % 360;
-	//const double PI = 3.141592653589793;
 
-
-	//for (int i = 0; i < 1000; i++)
-	//{
-	//	R = rand() % 360;
-	//	std::cout << R  << std::endl;
-	//std::cout << 400 + 400 * cos(R * PI / 180) << std::endl;
-	//std::cout << 400 + 400 * sin(R * PI / 180) << std::endl << std::endl;
 
 
 	 return 0;

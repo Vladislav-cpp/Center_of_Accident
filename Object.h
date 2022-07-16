@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <string>
 #include <iostream>
+#include <string>
 
 class Object
 {
@@ -12,10 +12,12 @@ public:
 
 	virtual void movement() = 0;
 
-	void draw(sf::RenderWindow& app);
+    void draw(sf::RenderWindow& app);
+	virtual bool collision(float x, float y)=0;
 	
 	void animation();//!!!!!!!
 
+std::string name;//!!!!!!!
 protected:
 	sf::Texture Texture_Player;
     sf::Sprite Sprite_Player;
@@ -25,7 +27,7 @@ protected:
 	float position_X;
 	float position_Y;
 	bool life;
-	std::string name;
+	
 
 };
 
