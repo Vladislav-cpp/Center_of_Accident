@@ -22,7 +22,7 @@ Object::Object(sf::Texture& t, int x, int y, int w, int h, int distance, int cou
 {
 	Sprite_Player.setTexture(t);
 	Sprite_Player.setTextureRect(sf::IntRect(x, y, w, h));
-	Sprite_Player.setPosition(position_X, position_Y);
+	//Sprite_Player.setPosition(position_X, position_Y);
 }
 
 void Object::animation()

@@ -24,13 +24,15 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 	{
 
 			R = rand() % 360;
+		//R = 90;
 			//std::cout << R << std::endl;
-			//std::cout << 400 + 400 * cos(R * PI / 180) << std::endl;
-			//std::cout << 400 + 400 * sin(R * PI / 180) << std::endl << std::endl;
+			std::cout << "x" << 400 + 400 * cos(R * PI / 180) << std::endl;
+			std::cout << "y"<< 400 + 400 * sin(R * PI / 180) << std::endl << std::endl;
 			x = 400 + 400 * cos(R * PI / 180);
 			y = 400 + 400 * sin(R * PI / 180);
 
-					Dust* d = new Dust(TDust, 0, 0, 151, 134, 151, 4, x-80/2, y-60/2);
+					Dust* d = new Dust(TDust, 0, 0, 151, 134, 151, 4, x, y);
+					//Dust* d = new Dust(TDust, 0, 0, 151, 134, 151, 4, x - 80 / 2, y - 60 / 2);
 					object.push_back(d);
 
 
@@ -38,8 +40,8 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 
 
 
-	Ufo* u = new Ufo(TUfo, 2, 2, 97, 97, 100, 20, 354, 354);
-	object.push_back(u);
+	//Ufo* u = new Ufo(TUfo, 2, 2, 97, 97, 100, 20, 354, 354);
+	//object.push_back(u);
 
 }
 
@@ -56,28 +58,28 @@ void Game::Run()
 	while (1)
 	{
 
-		std::cout << "45" << "\n";
-		//for (auto i = object.begin(); i != object.end();)
-		//{
-		//	Object* e = *i;
+		//std::cout << "45" << "\n";
+		for (auto i = object.begin(); i != object.end();)
+		{
+			Object* e = *i;
 
-		//	//e->movement();
-		//	i++;
-		//}
+			e->movement();
+			i++;
+		}
 
-		std::cout << "53" << "\n";
+		//std::cout << "53" << "\n";
 
 		window.clear();
 		window.draw(Sprite_map);
 
 		for (auto i : object) 
 		{
-		//	i->animation();
+			i->animation();
 			i->draw(window);
 			
         }
 		window.display();
-		std::cout << "61" << "\n";
+		//std::cout << "61" << "\n";
 
 
 

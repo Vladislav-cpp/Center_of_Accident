@@ -1,9 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "Ufo.h"
 #include "Dust.h"
 #include "Map.h"
-#include <iostream>
+
 #include <list>
 #include <cmath>
 
@@ -31,7 +32,7 @@ private:
 	
 
 public:
-	Game(int number_opponents=50);
+	Game(int number_opponents=1);
 	void Run();
 };
 
