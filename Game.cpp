@@ -2,12 +2,14 @@
 
 
 Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_height), "Center_of_Accident")
+ 
 {
 	
 
 	Tbackground.loadFromFile("images/cloudsLarge1.png");          Tbackground.setSmooth(true);
-	TDust.loadFromFile("images/DustCreatureSpritesheet.png");
-	TUfo.loadFromFile("images/Ufo.png");
+//	TDust.loadFromFile("images/meteorite.png");
+	TDust.loadFromFile("images/Ufos.png");
+	TUfo.loadFromFile("images/ufo.png");
 
 	Sprite_map.setTexture(Tbackground);
 	Sprite_map.setTextureRect(sf::IntRect(0, 0, 800, 800));
@@ -15,23 +17,33 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 
     window.setFramerateLimit(60);
 
-	for (int i = 0; i < number_opponents; i++)
+	int x;
+	int y;
+
+	for (int i = 0; i < number_opponents;i++)
 	{
-		Dust* d = new Dust();
 
-		d->settings(TDust, 161, 131, 904, 873, 10, 10, 10);//!!!!("Dust", 161, 131, 904, 873, 10,??? , ??? );
+			R = rand() % 360;
+			//std::cout << R << std::endl;
+			//std::cout << 400 + 400 * cos(R * PI / 180) << std::endl;
+			//std::cout << 400 + 400 * sin(R * PI / 180) << std::endl << std::endl;
+			x = 400 + 400 * cos(R * PI / 180);
+			y = 400 + 400 * sin(R * PI / 180);
 
-		object.push_back(d);
+					Dust* d = new Dust(TDust, 0, 0, 151, 134, 151, 4, x-80/2, y-60/2);
+					object.push_back(d);
+
+
 	}
 
-	Ufo* u = new Ufo();
-	u->settings(TUfo, 3, 3, 92, 92, 25, 400 - 92 / 2, 400 - 92 / 2);
+
+
+	Ufo* u = new Ufo(TUfo, 2, 2, 97, 97, 100, 20, 354, 354);
 	object.push_back(u);
 
 }
 
-//:Object("Images\\Ufo.png", 3, 3, 92, 92, 400 - 92 / 2, 400 - 92 / 2, 1000)
-//:Object("Images\\spritesheet.png", 161, 131, 904, 873, 10, 10, 100)
+
 
 
 
@@ -45,21 +57,25 @@ void Game::Run()
 	{
 
 		std::cout << "45" << "\n";
-		for (auto i = object.begin(); i != object.end();)
-		{
-			Object* e = *i;
+		//for (auto i = object.begin(); i != object.end();)
+		//{
+		//	Object* e = *i;
 
-			e->movement();
-			i++;
-		}
+		//	//e->movement();
+		//	i++;
+		//}
 
 		std::cout << "53" << "\n";
 
 		window.clear();
 		window.draw(Sprite_map);
 
-		for (auto i : object) i->draw(window);
-
+		for (auto i : object) 
+		{
+		//	i->animation();
+			i->draw(window);
+			
+        }
 		window.display();
 		std::cout << "61" << "\n";
 

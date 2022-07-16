@@ -1,10 +1,11 @@
 #include "Dust.h"
 
 
-Dust::Dust() 
+Dust::Dust(sf::Texture& t, int x, int y, int w, int h, int distance, int count, float posX, float posY)
+:Object(t,  x,  y,  w,  h,  distance,  count,  posX,  posY)
 {
 	name = "Dust";
-	Sprite_Player.setScale(sf::Vector2f(0.1f,0.1f));
+	Sprite_Player.setScale(sf::Vector2f(0.5f,0.5f));
 }
 
 void Dust::shot()

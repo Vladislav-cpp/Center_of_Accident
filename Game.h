@@ -5,7 +5,7 @@
 #include "Map.h"
 #include <iostream>
 #include <list>
-
+#include <cmath>
 
 class Game
 {
@@ -26,10 +26,12 @@ private:
 	const unsigned int windov_height = 800;
 	sf::RenderWindow window;
 
+	int R = rand() % 360;
+	static constexpr double PI = 3.141592653589793;
 	
 
 public:
-	Game(int number_opponents=1);
+	Game(int number_opponents=50);
 	void Run();
 };
 
