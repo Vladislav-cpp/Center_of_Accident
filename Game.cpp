@@ -40,8 +40,8 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 
 
 	//створення обєкта класа Ufo в центрі вікна 
-	Ufo* u = new Ufo(TUfo, 2, 2, 97, 97, 100, 20, 354, 354);
-	object.push_back(u);
+	//Ufo* u = new Ufo(TUfo, 2, 2, 97, 97, 100, 20, 354, 354);
+	//object.push_back(u);
 
 }
 
@@ -64,37 +64,37 @@ void Game::Run()
 
 
 		//якщо нажата мишка і обєкт під мишкою (Dust) то видалити його 
-		//if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		//{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
 
-		//	std::cout << "sf::Mouse::isButtonPressed(sf::Mouse::Left)\n";
+			std::cout << "sf::Mouse::isButtonPressed(sf::Mouse::Left)\n";
 
-		//	sf::Vector2i position = sf::Mouse::getPosition(window);
+			sf::Vector2i position = sf::Mouse::getPosition(window);
 
-		//	
-		//	for (auto i = object.begin(); i != object.end();)
+			
+			for (auto i = object.begin(); i != object.end();)
 
-  //          {
-  //          	Object* e = *i;
-		//		if (e->name == "Dust")
-		//		{
-		//			if(e->collision(position.x, position.y))
-		//				std::cout << "collision " << position.x << " " << position.y << " position\n\n";
-		//		}
-  //          	i++;
-  //          }
+            {
+            	Object* e = *i;
+				if (e->name == "Dust")
+				{
+					if(e->collision(position.x, position.y))
+						std::cout << "collision " << position.x << " " << position.y << " position\n\n";
+				}
+            	i++;
+            }
 
-		//}
+		}
 
 
 		//визов фун-члена усіх обєктив які є в листі
 		 
-		//for (auto i = object.begin(); i != object.end();)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//{
-		//	Object* e = *i;
-		//	e->movement();
-		//	i++;
-		//}
+		for (auto i = object.begin(); i != object.end();)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		{
+			Object* e = *i;
+			e->movement();
+			i++;
+		}
 
 
 		window.clear();

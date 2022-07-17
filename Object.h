@@ -8,16 +8,15 @@ class Object
 public:
 	Object(sf::Texture& t, int x, int y, int w, int h, int distance, int count, float posX, float posY);
 
-	//void settings(sf::Texture& t, int x, int y, int w, int h, int distance, int count, float posX, float posY);
-
 	virtual void movement() = 0;
 
     void draw(sf::RenderWindow& app);
 	virtual bool collision(float x, float y)=0;
 	
-	void animation();//!!!!!!!
+	void animation();//   animation(time)  !!!!!!!!
 
-std::string name;//!!!!!!!
+    std::string name;//   get_name !!!!!!!!
+
 protected:
 	sf::Texture Texture_Player;
     sf::Sprite Sprite_Player;
