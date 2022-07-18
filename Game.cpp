@@ -10,7 +10,9 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 //	TDust.loadFromFile("images/meteorite.png");
 	TDust.loadFromFile("images/Ufos.png");
 	TUfo.loadFromFile("images/ufo.png");
+	TChuck.loadFromFile("images/14.png");
 
+	
 	Sprite_map.setTexture(Tbackground);
 	Sprite_map.setTextureRect(sf::IntRect(0, 0, 800, 800));
 	Sprite_map.setPosition(0, 0);
@@ -30,8 +32,11 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 			//std::cout << "x" << 400 + 400 * cos(R * PI / 180) << std::endl;
 			//std::cout << "y"<< 400 + 400 * sin(R * PI / 180) << std::endl << std::endl;
 
-			x = 400 + 400 * cos(R * PI / 180);
-			y = 400 + 400 * sin(R * PI / 180);
+			//x = 400 + 400 * cos(R * PI / 180);
+			//y = 400 + 400 * sin(R * PI / 180);
+
+			x = 400 + 400 * cos(R * 180 /PI );
+			y = 400 + 400 * sin(R *  180/PI );
 
 			Dust* d = new Dust(TDust, 0, 0, 151, 134, 151, 4, x, y);
 			object.push_back(d);
@@ -72,28 +77,29 @@ void Game::Run()
 			sf::Vector2i position = sf::Mouse::getPosition(window);
 
 			
-			for (auto i = object.begin(); i != object.end();)
+			Chuck* u = new Chuck(TChuck, 29, 46, 182,50, 0, 0, position.x, position.y);
+               object.push_back(u);
 
-            {
-            	Object* e = *i;
-				if (e->name == "Dust")
-				{
-					if(e->collision(position.x, position.y))
-						std::cout << "collision " << position.x << " " << position.y << " position\n\n";
-				}
-            	i++;
-            }
+			//for (auto i = object.begin(); i != object.end();)
+
+   //         {
+   //         	Object* e = *i;
+			//	if (e->name == "Dust")
+			//	{
+			//		if (e->collision(position.x, position.y));
+			//			//std::cout << "collision " << position.x << " " << position.y << " position\n\n";
+			//	}
+   //         	i++;
+   //         }
 
 		}
 
 
 		//визов фун-члена усіх обєктив які є в листі
 		 
-		for (auto i = object.begin(); i != object.end();)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		{
-			Object* e = *i;
-			e->movement();
-			i++;
+		for (auto i : object)//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		{	
+			i->movement();
 		}
 
 
@@ -107,8 +113,24 @@ void Game::Run()
 			i->draw(window);
         }
 		
+
+
+
+
+
+
 		window.display();
 		
+		//for (auto i = object.begin(); i != object.end();)
+		//{
+		//	Object* e = *i;
+
+		//	if  (e->name == "Chuck") { i = object.erase(i); delete e; }
+		//	else i++;
+		//}
+
+
+
 			//float time = clock.getElapsedTime().asMicroseconds();
 			//time /= 5000;
 	       // clock.restart();

@@ -4,6 +4,7 @@
 #include "Ufo.h"
 #include "Dust.h"
 #include "Map.h"
+#include "Chuck.h"
 
 #include <list>
 #include <cmath>
@@ -12,7 +13,7 @@ class Game
 {
 private:
 
-	sf::Texture Tbackground, TDust, TUfo;
+	sf::Texture Tbackground, TDust, TUfo, TChuck;
 	std::list<Object*> object;
 
 	//enum State{		game_over=0,		game_is_on 		};
@@ -28,7 +29,7 @@ private:
 	sf::RenderWindow window;
 
 	int R = rand() % 360;
-	static constexpr double PI = 3.141592653589793;
+	static constexpr double PI = 3.141592653589793;// зробити доступним усім класам
 	
 
 public:

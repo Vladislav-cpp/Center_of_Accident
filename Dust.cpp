@@ -1,17 +1,15 @@
 #include "Dust.h"
 
 
-Dust::Dust(sf::Texture& t, int x, int y, int w, int h, int distance, int count, float posX, float posY)
-:Object(t,  x,  y,  w,  h,  distance,  count,  posX,  posY)
+Dust::Dust(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float posX, float posY)
+:Object(t,  x,  y,  w,  h, distance_to_sprite,  count,  posX,  posY)
 {
 	name = "Dust";
 	Sprite_Player.setScale(sf::Vector2f(0.5f,0.5f));
 	Sprite_Player.setPosition(position_X - 37.5, position_Y - 37.5);
 }
 
-void Dust::shot()
-{
-}
+
 
 void Dust::movement()
 {
@@ -26,8 +24,8 @@ void Dust::movement()
 	if (distance<5) return;
 	//std::cout << "if (   !---------------------------------------------------------"<< "\n";
 	
-	position_X += 10 * ( destination_x - position_X ) / distance;
-	position_Y += 10 * ( destination_y - position_Y ) / distance;
+	position_X += 10 * ( destination_x - position_X ) / distance;//( destination_x - position_X ) / distance 
+	position_Y += 10 * ( destination_y - position_Y ) / distance;//нормалізіція вектора/ 10 замінити на time /!!!!!!
 	
 	Sprite_Player.setPosition(sf::Vector2f(position_X- 37.5, position_Y- 37.5));
 
