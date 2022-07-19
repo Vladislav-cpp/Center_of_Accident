@@ -1,23 +1,16 @@
 #include <ctime>
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>//чому тут?
 #include <iostream>
 #include "Game.h"
-//#include <iostream>
-//#include <SFML/Graphics.hpp>
+
 
 
 int main()
 {
-std::srand(time(NULL));
+std::srand(time(NULL));//чому тут?
 
       Game Cyber_Game;
    	  Cyber_Game.Run();
-
-
-
-	
-
-
 
 	 return 0;
 }

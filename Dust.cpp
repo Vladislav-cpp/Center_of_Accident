@@ -11,30 +11,24 @@ Dust::Dust(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, i
 
 
 
-void Dust::movement()
+void Dust::movement(float time)
 {
+	time /= 7000;
+
+	//відстань до обєкта якого ми рухаємось
 	float distance = sqrt( pow (destination_x - position_X ,2) +pow(destination_y - position_Y,2)  );
 
-	//std::cout << "distance = " << distance << "\n";
-	//std::cout <<" position_X - 40(!)"<< position_X - 40 << "\n";
-	//std::cout <<" position_Y - 30(!)"<< position_Y - 30 << "\n" ;
-	//std::cout << "position_X <= (destination_x - 10) -> " << destination_x -10 << "\n";
-	//std::cout << "position_X <= (destination_x + 10) -> " << destination_x +10<< "\n" << "\n";
-
-	if (distance<5) return;
-	//std::cout << "if (   !---------------------------------------------------------"<< "\n";
+	if (distance<5) return; //задля забагуавння на місті огранічцєм
 	
-	position_X += 10 * ( destination_x - position_X ) / distance;//( destination_x - position_X ) / distance 
-	position_Y += 10 * ( destination_y - position_Y ) / distance;//нормалізіція вектора/ 10 замінити на time /!!!!!!
+	position_X += time  * ( destination_x - position_X ) / distance;//( destination_x - position_X ) / distance 
+	position_Y += time  * ( destination_y - position_Y ) / distance;//нормалізіція вектора/ 10 замінити на time /!!!!!!
 	
-	Sprite_Player.setPosition(sf::Vector2f(position_X- 37.5, position_Y- 37.5));
-
-	//std::cout << position_X - 40 << "\n";
- //   std::cout << position_Y - 30 << "\n" << "\n";
+	Sprite_Player.setPosition(sf::Vector2f(position_X- 37.5,  position_Y- 37.5));
 }
 
-bool Dust::collision(float x, float y)//є баг колізія дирява
+bool Dust::collision(float x, float y)
 {
+	//за допомогою 2 еліпсів перевіряємо колізію 
 	if ( 
 		 ( pow(x - position_X , 2) / 1406.25 + pow(y - position_Y-2.5 , 2) / 121 <= 1 &&
 		   pow(x - position_X , 2) / 1406.25 + pow(y - position_Y -2.5, 2) / 121 >= 0 )

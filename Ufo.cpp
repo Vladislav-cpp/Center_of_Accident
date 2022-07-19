@@ -3,19 +3,19 @@
 Ufo::Ufo(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float posX, float posY)
 	:Object(t, x, y, w, h, distance_to_sprite, count, posX, posY)
 {
-//	Sprite_Player.setScale(sf::Vector2f(0.1f, 0.1f));
-	Sprite_Player.setPosition(position_X, position_Y);
-	
 	name = "Ufo";
+	Sprite_Player.setPosition(position_X, position_Y);
 }
 
 
-void Ufo::movement()
+void Ufo::movement(float time)
 {
 }
 
 bool Ufo::collision(float x, float y)
 {
+	if (pow(x - 400, 2) + pow(y - 400, 2) <= 95)
+		return true;
 	return false;
 }
 

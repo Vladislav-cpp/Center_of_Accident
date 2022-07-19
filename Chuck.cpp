@@ -1,55 +1,76 @@
 #include "Chuck.h"
 
 
-Chuck::Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float posX, float posY)
-	:Object(t, x, y, w, h, distance_to_sprite, count, posX, posY)
+Chuck::Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float cursor_position_X, float cursor_position_Y)
+	:Object(t, x, y, w, h, distance_to_sprite, count, 400, 400)
 {
 	name = "Chuck";
 	Sprite_Player.setScale(sf::Vector2f(0.2f, 0.2f));
 
-	float distance = sqrt(pow(posX - 400, 2) + pow(posY - 400, 2));
-	direction_movement_X = (posX - 400) / distance;
-	direction_movement_Y = (posY - 400) / distance;
+	float distance = sqrt(pow(cursor_position_X - 400, 2) + pow(cursor_position_Y - 400, 2));
 
-	//direction_movement_X = posX / (sqrt(pow(posX, 2) + pow(posY, 2))) ;
-	//direction_movement_Y = posY / (sqrt(pow(posY, 2) + pow(posY, 2)));
-	//
-	std::cout << "direction_movement_X  " << direction_movement_X << "\n";
-	std::cout << "direction_movement_Y  " << direction_movement_Y << "\n";
+	direction_movement_X = (cursor_position_X - 400) / distance;//( posX-400 )/ distance -
+	direction_movement_Y = (cursor_position_Y - 400) / distance;//нормалізіція вектора
 
-	//std::cout << direction_movement_X << "\n";
-	std::cout << "acos(direction_movement_X)* 57.296)  "<< acos(direction_movement_X) * 180/ PI << "\n" << "\n";
-	int negative_angle = 1;
+	//якщо 1 і 2 чверть координат робимо коєф кута відємним
+      int negative_angle = 1;
 	if ( direction_movement_X >= 0 && direction_movement_Y < 0
 	                                                               ||
 	     direction_movement_X <= 0 && direction_movement_Y <= 0 )
 		negative_angle = -1;
-	//if (direction_movement_Y > 0) negative_angle = -1;
-
-	//Sprite_Player.setRotation(negative_angle*acos(direction_movement_X) * 180 / PI);//* PI / 180
-	Sprite_Player.rotate(negative_angle * acos(direction_movement_X) * 180 / PI);
-	//Sprite_Player.rotate(340);
-
-	Sprite_Player.setPosition(400, 400);//!!!!!
-	
 
 
-}
+	float angle =  acos(direction_movement_X) * 180 / PI;
+	Sprite_Player.rotate(negative_angle * angle);
 
-void Chuck::movement()
-{
-	position_X += 10 * direction_movement_X; //( posX-400 )/ distance 
-	position_Y += 10 * direction_movement_Y; //нормалізіція вектора/ 10 замінити на time /!!!!!!
+	float a = 0; 
+	float b = 0; 
 
-	
-	if (position_X < 0 || position_X >800) return; //!!!!!
-	if (position_Y < 0 || position_Y >800) return; //!!!!!
+	//центруєм спрайт (відносно точкі обертання ). зміщуємо в центр
+	if (direction_movement_X >= 0 && direction_movement_Y > 0) 
+	{
+		a = sin(angle *  PI /180) * 5;
+		b = sin((90 - angle) * PI / 180) * -5 ;
+	}
+
+	if (direction_movement_X > 0 && direction_movement_Y <= 0) 
+	{                      
+		 a = sin(angle * PI / 180) * -5  ;
+		 b = sin((90 - angle) * PI / 180) * -5 ;
+	}
+
+	if (direction_movement_X <= 0 && direction_movement_Y < 0)
+	{    
+		a = sin( (90- (angle - 90)) * PI / 180) * -5 ;
+		b = (sin ( (angle  -90) * PI / 180) * 5);
+	}
+
+	if (direction_movement_X < 0 && direction_movement_Y >= 0) 
+	{
+		 a = sin( (90 - (angle - 90)) * PI / 180 ) * 5;
+		 b = sin(  (angle - 90) * PI / 180 ) * 5 ;
+	}
+
+	position_X = 400 + a;
+	position_Y = 400 + b;
 
 	Sprite_Player.setPosition(position_X, position_Y);
-		std::cout << "if (   !---------------------------------------------------------"<< "\n";
 }
 
-bool Chuck::collision(float x, float y)
+void Chuck::movement(float time)
+{
+	time /= 1500;  
+	
+	position_X += time * direction_movement_X;
+	position_Y += time * direction_movement_Y;
+
+	if (position_X < 0 || position_X >800) Set_life(0); 
+	if (position_Y < 0 || position_Y >800) Set_life(0); 
+
+	Sprite_Player.setPosition(position_X, position_Y);
+}
+
+bool Chuck::collision(float x, float y)//убрать колізцю !!!!!!!!!!!!!!!!!!!!
 {
 	return false;
 }

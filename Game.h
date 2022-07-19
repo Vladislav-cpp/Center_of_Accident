@@ -24,6 +24,7 @@ private:
 	sf::Texture Texture_map;
 	sf::Sprite Sprite_map;
 
+	int number_opponents;
 	const unsigned int windov_width = 800;
 	const unsigned int windov_height = 800;
 	sf::RenderWindow window;
@@ -31,9 +32,11 @@ private:
 	int R = rand() % 360;
 	static constexpr double PI = 3.141592653589793;// зробити доступним усім класам
 	
+	sf::Clock clock;
+	sf::Clock clock_recharge;
 
 public:
-	Game(int number_opponents=3);
+	Game(int number_opponents=5);
 	void Run();
 };
 
