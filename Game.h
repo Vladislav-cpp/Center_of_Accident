@@ -8,6 +8,7 @@
 
 #include <list>
 #include <cmath>
+#include <ctime>
 
 class Game
 {
@@ -29,14 +30,15 @@ private:
 	const unsigned int windov_height = 800;
 	sf::RenderWindow window;
 
-	int R = rand() % 360;
-	static constexpr double PI = 3.141592653589793;// зробити доступним усім класам
+	int R = 0;
+
+	static constexpr double degrees_to_radians = 57.2958;// зробити доступним усім класам
 	
 	sf::Clock clock;
 	sf::Clock clock_recharge;
-
+	sf::Cursor cursor;
 public:
-	Game(int number_opponents=5);
+	Game(int number_opponents=3);
 	void Run();
 };
 

@@ -2,8 +2,10 @@
 
 
 Dust::Dust(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float posX, float posY)
-:Object(t,  x,  y,  w,  h, distance_to_sprite,  count,  posX,  posY)
+:Object(t,  x,  y,  w,  h, distance_to_sprite,  count)
 {
+	position_X = posX;
+	position_Y = posY;
 	name = "Dust";
 	Sprite_Player.setScale(sf::Vector2f(0.5f,0.5f));
 	Sprite_Player.setPosition(position_X - 37.5, position_Y - 37.5);
@@ -13,7 +15,7 @@ Dust::Dust(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, i
 
 void Dust::movement(float time)
 {
-	time /= 7000;
+	time /= 7;
 
 	//відстань до обєкта якого ми рухаємось
 	float distance = sqrt( pow (destination_x - position_X ,2) +pow(destination_y - position_Y,2)  );

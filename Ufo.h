@@ -5,9 +5,9 @@
 class Ufo :public Object
 {
 public:
-	Ufo(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float posX, float posY);
+	Ufo(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count);
 	
-	 void movement(float time);
+	 void movement(float time);//!!!!!!!!!!!
      bool collision(float x, float y);
 private:
 	

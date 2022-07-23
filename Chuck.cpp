@@ -1,65 +1,66 @@
 #include "Chuck.h"
 
 
-Chuck::Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float cursor_position_X, float cursor_position_Y)
-	:Object(t, x, y, w, h, distance_to_sprite, count, 400, 400)
+Chuck::Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float direction_X, float direction_Y)
+	:Object(t, x, y, w, h, distance_to_sprite, count)
 {
+
+	position_X = 400;
+	position_Y = 400;
+
+
 	name = "Chuck";
 	Sprite_Player.setScale(sf::Vector2f(0.2f, 0.2f));
 
-	float distance = sqrt(pow(cursor_position_X - 400, 2) + pow(cursor_position_Y - 400, 2));
+	float distance = sqrt(pow(direction_X - 400, 2) + pow(direction_Y - 400, 2));
 
-	direction_movement_X = (cursor_position_X - 400) / distance;//( posX-400 )/ distance -
-	direction_movement_Y = (cursor_position_Y - 400) / distance;//нормалізіція вектора
+	Sprite_Player.setOrigin(0, h/2);
+
+
+	direction_movement_X = (direction_X - position_X) / distance;//( posX-400 )/ distance -
+	direction_movement_Y = (direction_Y - position_Y) / distance;//нормалізіція вектора
 
 	//якщо 1 і 2 чверть координат робимо коєф кута відємним
       int negative_angle = 1;
-	if ( direction_movement_X >= 0 && direction_movement_Y < 0
-	                                                               ||
-	     direction_movement_X <= 0 && direction_movement_Y <= 0 )
+	if (direction_movement_X >= 0 && direction_movement_Y < 0 || direction_movement_X <= 0 && direction_movement_Y <= 0)
 		negative_angle = -1;
 
-
-	float angle =  acos(direction_movement_X) * 180 / PI;
+	float angle =  acos(direction_movement_X) * degrees_to_radians;
 	Sprite_Player.rotate(negative_angle * angle);
 
-	float a = 0; 
-	float b = 0; 
-
+	//float a = 0; 
+	//float b = 0; 
+	//
 	//центруєм спрайт (відносно точкі обертання ). зміщуємо в центр
-	if (direction_movement_X >= 0 && direction_movement_Y > 0) 
-	{
-		a = sin(angle *  PI /180) * 5;
-		b = sin((90 - angle) * PI / 180) * -5 ;
-	}
-
-	if (direction_movement_X > 0 && direction_movement_Y <= 0) 
-	{                      
-		 a = sin(angle * PI / 180) * -5  ;
-		 b = sin((90 - angle) * PI / 180) * -5 ;
-	}
-
-	if (direction_movement_X <= 0 && direction_movement_Y < 0)
-	{    
-		a = sin( (90- (angle - 90)) * PI / 180) * -5 ;
-		b = (sin ( (angle  -90) * PI / 180) * 5);
-	}
-
-	if (direction_movement_X < 0 && direction_movement_Y >= 0) 
-	{
-		 a = sin( (90 - (angle - 90)) * PI / 180 ) * 5;
-		 b = sin(  (angle - 90) * PI / 180 ) * 5 ;
-	}
-
-	position_X = 400 + a;
-	position_Y = 400 + b;
+	//if (direction_movement_X >= 0 && direction_movement_Y > 0) 
+	//{
+	//	a = sin(angle *  PI /180) * 5;
+	//	b = sin((90 - angle) * PI / 180) * -5 ;
+	//}
+	//if (direction_movement_X > 0 && direction_movement_Y <= 0) 
+	//{                      
+	//	 a = sin(angle * PI / 180) * -5  ;
+	//	 b = sin((90 - angle) * PI / 180) * -5 ;
+	//}
+	//if (direction_movement_X <= 0 && direction_movement_Y < 0)
+	//{    
+	//	a = sin( (90- (angle - 90)) * PI / 180) * -5 ;
+	//	b = (sin ( (angle  -90) * PI / 180) * 5);
+	//}
+	//if (direction_movement_X < 0 && direction_movement_Y >= 0) 
+	//{
+	//	 a = sin( (90 - (angle - 90)) * PI / 180 ) * 5;
+	//	 b = sin(  (angle - 90) * PI / 180 ) * 5 ;
+	//}
+	//position_X = 400 + a;
+	//position_Y = 400 + b;
 
 	Sprite_Player.setPosition(position_X, position_Y);
 }
 
 void Chuck::movement(float time)
 {
-	time /= 1500;  
+	time /= speed_movement;
 	
 	position_X += time * direction_movement_X;
 	position_Y += time * direction_movement_Y;
@@ -70,7 +71,7 @@ void Chuck::movement(float time)
 	Sprite_Player.setPosition(position_X, position_Y);
 }
 
-bool Chuck::collision(float x, float y)//убрать колізцю !!!!!!!!!!!!!!!!!!!!
+bool Chuck::collision(float x, float y)
 {
 	return false;
 }

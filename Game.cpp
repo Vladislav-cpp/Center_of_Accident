@@ -5,12 +5,12 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 , number_opponents(number_opponents)
  
 {
+	std::srand(time(NULL));
 	
-
 	Tbackground.loadFromFile("images/cloudsLarge1.png");          Tbackground.setSmooth(true);
-	TDust.loadFromFile("images/Ufos.png");
-	TUfo.loadFromFile("images/ufo.png");
-	TChuck.loadFromFile("images/14.png");
+	TDust.loadFromFile("images/Ufos.png");                      //TDust.setSmooth(true);
+	TUfo.loadFromFile("images/ufo.png");                        //TUfo.setSmooth(true);
+	TChuck.loadFromFile("images/14.png");                       //TChuck.setSmooth(true);
 
 	
 	Sprite_map.setTexture(Tbackground);
@@ -18,6 +18,10 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 	Sprite_map.setPosition(0, 0);
 
     window.setFramerateLimit(60);
+
+	cursor.loadFromSystem(sf::Cursor::Arrow);//написати прицел вместо курсора 
+	window.setMouseCursor(cursor);
+
 }
 
 
@@ -29,7 +33,7 @@ void Game::Run()
 
 	
 		//створення обєкта класа Ufo в центрі вікна 
-		Ufo* u = new Ufo(TUfo, 2, 2, 97, 97, 100, 20, 352, 352);
+		Ufo* u = new Ufo(TUfo, 2, 2, 97, 97, 100, 20);
 		object.push_back(u);
 
 	int respawn_x;
@@ -37,8 +41,8 @@ void Game::Run()
 	int number_Dust = 0;
 	while (1)
 	{
-		float time = clock.getElapsedTime().asMicroseconds();
-		float time_recharge = clock_recharge.getElapsedTime().asMicroseconds();
+		float time = clock.getElapsedTime().asMilliseconds();
+		float recharge_time = clock_recharge.getElapsedTime().asMilliseconds();
 	    clock.restart();
 
 		//створення обєктив класа Dust в рандомних позиціях по окружності
@@ -50,8 +54,8 @@ void Game::Run()
 		{
 			R = rand() % 360;
 
-			respawn_x = 400 + 400 * cos(R * 180 / PI);
-			respawn_y = 400 + 400 * sin(R * 180 / PI);
+			respawn_x = 400 + 400 * cos(R * degrees_to_radians);
+			respawn_y = 400 + 400 * sin(R * degrees_to_radians);
 
 			Dust* d = new Dust(TDust, 0, 0, 151, 134, 151, 4, respawn_x, respawn_y);
 			object.push_back(d);
@@ -80,7 +84,7 @@ void Game::Run()
 		//якщо нажата мишка !!!!!!!!!!!!!!!
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			if (time_recharge > 125000)
+			if (recharge_time > 125)
 			{
 				sf::Vector2i position = sf::Mouse::getPosition(window);
 				Chuck* u = new Chuck(TChuck, 29, 46, 182, 50, 0, 0, position.x, position.y);
@@ -103,7 +107,7 @@ void Game::Run()
 		//аніміровання та отрисовка всіх обєктів  які є в листі
 		for (auto i : object) 
 		{
-			i->animation();
+			i->animation(time);
 			i->draw(window);
         }
 		

@@ -1,19 +1,21 @@
 #include "Object.h"
 
 
-Object::Object(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float posX, float posY)
-	:life(1), position_X(posX),position_Y(posY),x(x),y(y),w(w),h(h), distance_to_sprite(distance_to_sprite), frame(0), count(count)
+Object::Object(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int number_frames)
+	:life(1),x(x),y(y),w(w),h(h), distance_to_sprite(distance_to_sprite), current_frame(0), number_frames(number_frames)
 {
 	Sprite_Player.setTexture(t);
 	Sprite_Player.setTextureRect(sf::IntRect(x, y, w, h));
-	//Sprite_Player.setPosition(position_X, position_Y);
+	//Sprite_Player.setPosition(position_X, position_Y);number_pictures
 }
 
-void Object::animation()
+void Object::animation(int time)
 {
-	frame++;
-	if (frame >= count)  frame = 0;
-	Sprite_Player.setTextureRect(sf::IntRect(x+ frame* distance_to_sprite,y,w,h));
+	current_frame += animation_speed *time;
+
+	if (current_frame >= number_frames)  current_frame = 0;
+
+	Sprite_Player.setTextureRect(sf::IntRect(x+ static_cast<int>(current_frame) * distance_to_sprite,y,w,h));
 }
 
 
