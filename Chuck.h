@@ -7,7 +7,8 @@
 class Chuck : public Object
 {
 public:
-	Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float posX, float posY);
+	Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count,
+		float direction_X, float direction_Y, float pos_spawn_X, float pos_spawn_Y);
 
 	void movement(float time);
 	bool collision(float x, float y);//!!!!!!!!!!!!!!
@@ -17,6 +18,6 @@ private:
 	float direction_movement_X;
 	float direction_movement_Y;
 	
-	static constexpr double degrees_to_radians = 57.2958;
+	static constexpr double radians_to_degrees = 57.2958;
 };
 

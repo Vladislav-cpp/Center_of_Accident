@@ -1,18 +1,20 @@
 #include "Chuck.h"
 
 
-Chuck::Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float direction_X, float direction_Y)
+Chuck::Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count,
+
+	float direction_X, float direction_Y, float pos_spawn_X, float pos_spawn_Y)
 	:Object(t, x, y, w, h, distance_to_sprite, count)
 {
 
-	position_X = 400;
-	position_Y = 400;
+	position_X = pos_spawn_X;
+	position_Y = pos_spawn_Y;
 
 
 	name = "Chuck";
 	Sprite_Player.setScale(sf::Vector2f(0.2f, 0.2f));
 
-	float distance = sqrt(pow(direction_X - 400, 2) + pow(direction_Y - 400, 2));
+	float distance = sqrt(pow(direction_X - pos_spawn_X, 2) + pow(direction_Y - pos_spawn_Y, 2));
 
 	Sprite_Player.setOrigin(0, h/2);
 
@@ -25,7 +27,7 @@ Chuck::Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite,
 	if (direction_movement_X >= 0 && direction_movement_Y < 0 || direction_movement_X <= 0 && direction_movement_Y <= 0)
 		negative_angle = -1;
 
-	float angle =  acos(direction_movement_X) * degrees_to_radians;
+	float angle =  acos(direction_movement_X) * radians_to_degrees;
 	Sprite_Player.rotate(negative_angle * angle);
 
 	//float a = 0; 
@@ -65,8 +67,8 @@ void Chuck::movement(float time)
 	position_X += time * direction_movement_X;
 	position_Y += time * direction_movement_Y;
 
-	if (position_X < 0 || position_X >800) Set_life(0); 
-	if (position_Y < 0 || position_Y >800) Set_life(0); 
+	if (position_X < 0 || position_X >1300) Set_life(0); //!!!!!!!!!!!!!!!!!!
+	if (position_Y < 0 || position_Y >1300) Set_life(0); //!!!!!!!!!!!!!!!!!!
 
 	Sprite_Player.setPosition(position_X, position_Y);
 }
