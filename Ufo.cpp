@@ -1,7 +1,7 @@
 #include "Ufo.h"
 
-Ufo::Ufo(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count, float pos_spawn_X, float pos_spawn_Y)
-	:Object(t, x, y, w, h, distance_to_sprite, count)
+Ufo::Ufo(std::string file_name, int x, int y, int w, int h, int distance_to_sprite, int count, float pos_spawn_X, float pos_spawn_Y)
+	:Object(file_name, x, y, w, h, distance_to_sprite, count)
 {
 	position_X = pos_spawn_X;
 	position_Y = pos_spawn_Y;

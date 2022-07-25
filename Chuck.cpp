@@ -1,10 +1,10 @@
 #include "Chuck.h"
 
 
-Chuck::Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count,
+Chuck::Chuck(std::string file_name, int x, int y, int w, int h, int distance_to_sprite, int count,
 
 	float direction_X, float direction_Y, float pos_spawn_X, float pos_spawn_Y)
-	:Object(t, x, y, w, h, distance_to_sprite, count)
+	:Object(file_name, x, y, w, h, distance_to_sprite, count)
 {
 
 	position_X = pos_spawn_X;

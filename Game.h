@@ -9,16 +9,20 @@
 #include <cmath>
 #include <ctime>
 #include <SFML/Audio.hpp>
+#include "Information_window.h"
 
 class Game
 {
 private:
 
-	
 
-	sf::Texture Tbackground, TDust, TUfo, TChuck;
-	sf::Texture Texture_map;
-	sf::Sprite Sprite_map;
+	sf::Texture Tbackground;
+	sf::Sprite Sprite_Tbackground;
+
+
+	std::string Dust_name = ("images/Ufos.png");
+	std::string Ufo_nam = ("images/ufo.png");
+	std::string Chuck_nam = ("images/14.png");
 
 	sf::Clock clock;
 	sf::Clock clock_recharge;
@@ -41,7 +45,7 @@ private:
 
     int number_opponents=0;
 	int recharge = 300;
-	int create_opponents = 500; 
+	int create_opponents = 1000; 
 	int number_of_fps = 60;
 
 
@@ -55,6 +59,8 @@ private:
 	float radius_spawn_dust_Y= 450;
 
 	sf::RenderWindow window;
+
+	Information_window Iw{};
 
 public:
 	Game(int number_opponents=5);

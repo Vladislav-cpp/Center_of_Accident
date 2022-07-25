@@ -1,9 +1,9 @@
 #include "Dust.h"
 
 
-Dust::Dust(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite,
+Dust::Dust(std::string file_name, int x, int y, int w, int h, int distance_to_sprite,
 	int count, float posX, float posY, float pos_target_X, float pos_target_Y)
-:Object(t,  x,  y,  w,  h, distance_to_sprite,  count)
+:Object(file_name,  x,  y,  w,  h, distance_to_sprite,  count)
 {
 	position_X = posX;
 	position_Y = posY;

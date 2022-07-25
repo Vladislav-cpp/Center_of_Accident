@@ -7,7 +7,7 @@
 class Chuck : public Object
 {
 public:
-	Chuck(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int count,
+	Chuck(std::string file_name, int x, int y, int w, int h, int distance_to_sprite, int count,
 		float direction_X, float direction_Y, float pos_spawn_X, float pos_spawn_Y);
 
 	void movement(float time);
