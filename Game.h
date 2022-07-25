@@ -3,12 +3,12 @@
 //#include <iostream>
 #include "Ufo.h"
 #include "Dust.h"
-#include "Map.h"
 #include "Chuck.h"
 
 #include <list>
 #include <cmath>
 #include <ctime>
+#include <SFML/Audio.hpp>
 
 class Game
 {
@@ -22,6 +22,8 @@ private:
 
 	sf::Clock clock;
 	sf::Clock clock_recharge;
+	sf::Clock clock_create_opponents;
+
 	sf::Cursor cursor;
 
 	sf::SoundBuffer shotBuffer;
@@ -36,16 +38,18 @@ private:
 	static constexpr double radians_to_degrees = 57.2958;// зробити доступним усім класам
 	const unsigned int windov_width = 1300;
 	const unsigned int windov_height = 900;
+
     int number_opponents=0;
 	int recharge = 300;
+	int create_opponents = 500; 
 	int number_of_fps = 60;
 
 
 	float pos_spawn_ufo_X= windov_width/2;
 	float pos_spawn_ufo_Y= windov_height/2;
 
-	float respawn_dust_x;
-	float respawn_dust_y;
+	float respawn_dust_x=0;
+	float respawn_dust_y=0;
 
 	float radius_spawn_dust_X= 450;
 	float radius_spawn_dust_Y= 450;

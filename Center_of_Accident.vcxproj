@@ -145,8 +145,8 @@
     <ClCompile Include="Chuck.cpp" />
     <ClCompile Include="Dust.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Picture.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Ufo.cpp" />
   </ItemGroup>
@@ -154,8 +154,8 @@
     <ClInclude Include="Chuck.h" />
     <ClInclude Include="Dust.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Picture.h" />
     <ClInclude Include="Ufo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

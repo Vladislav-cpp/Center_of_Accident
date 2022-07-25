@@ -12,7 +12,8 @@ Dust::Dust(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite,
 
 	name = "Dust";
 	Sprite_Player.setScale(sf::Vector2f(0.5f,0.5f));
-	Sprite_Player.setPosition(position_X - 37.5, position_Y - 37.5);
+	Sprite_Player.setOrigin(75, 75);
+	Sprite_Player.setPosition(position_X , position_Y );
 
 }
 
@@ -30,12 +31,12 @@ void Dust::movement(float time)
 	position_X += time  * ( destination_x - position_X ) / distance;//( destination_x - position_X ) / distance 
 	position_Y += time  * ( destination_y - position_Y ) / distance;//нормалізіція вектора/ 10 замінити на time /!!!!!!
 	
-	Sprite_Player.setPosition(sf::Vector2f(position_X- 37.5,  position_Y- 37.5));
+	Sprite_Player.setPosition(sf::Vector2f(position_X,  position_Y));
 }
 
 bool Dust::collision(float x, float y)
 {
-	//за допомогою 2 еліпсів перевіряємо колізію 
+	//за допомогою 2 еліпсів перевіряємо колізію  .1406.25 , 121 , 210.25 , 900 коефіцієнти еліпса !!!!!!! замінити на змінні
 	if ( 
 		 ( pow(x - position_X , 2) / 1406.25 + pow(y - position_Y-2.5 , 2) / 121 <= 1 &&
 		   pow(x - position_X , 2) / 1406.25 + pow(y - position_Y -2.5, 2) / 121 >= 0 )

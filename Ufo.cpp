@@ -7,7 +7,8 @@ Ufo::Ufo(sf::Texture& t, int x, int y, int w, int h, int distance_to_sprite, int
 	position_Y = pos_spawn_Y;
 	animation_speed = 0.04;
 	name = "Ufo";
-	Sprite_Player.setPosition(position_X-48, position_Y-48);
+	Sprite_Player.setOrigin(48,48);
+	Sprite_Player.setPosition(position_X, position_Y);
 }
 
 
@@ -17,7 +18,10 @@ void Ufo::movement(float time)
 
 bool Ufo::collision(float x, float y)
 {
-	if (pow(x - position_X, 2) + pow(y - position_Y, 2) <= 95)
+
+
+
+	if (pow(x - position_X, 2) + pow(y - position_Y, 2) <= 8000)
 		return true;
 	return false;
 }
