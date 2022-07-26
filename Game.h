@@ -65,6 +65,7 @@ private:
 public:
 	Game(int number_opponents=5);
 	void Run();
+	void Menu_overview();
 };
 
 

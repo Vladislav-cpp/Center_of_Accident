@@ -34,6 +34,8 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 
 void Game::Run()
 {
+	    //відкриваєио меню
+	     Menu_overview();
 
 	
 		//створення обєкта класа Ufo в центрі вікна 
@@ -152,7 +154,7 @@ void Game::Run()
 		window.clear();
 		window.draw(Sprite_Tbackground);
 
-
+		//закриття вікна і виход з циклу
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -175,6 +177,60 @@ void Game::Run()
 
 		window.display();
 
+	}
+}
+
+void Game::Menu_overview()
+{
+	sf::Texture TMenu;	TMenu.loadFromFile("images/menu/game__menu.png");            TMenu.setSmooth(true);
+	sf::Sprite Smenu;	Smenu.setTexture(TMenu);
+	Smenu.setTextureRect(sf::IntRect(0, 0, 1000, 563));
+	Smenu.setPosition(0, 0);
+
+	sf::Texture TMenu_option;	TMenu_option.loadFromFile("images/menu/option.png");            TMenu_option.setSmooth(true);
+	sf::Sprite Smenu_option;	Smenu_option.setTexture(TMenu_option);
+	Smenu_option.setTextureRect(sf::IntRect(0, 0, 227, 152));
+	Smenu_option.setPosition(427, 130);
+
+	sf::Texture TMenu_start;	TMenu_start.loadFromFile("images/menu/start.png");            TMenu_start.setSmooth(true);
+	sf::Sprite SMenu_start;	SMenu_start.setTexture(TMenu_start);
+	SMenu_start.setTextureRect(sf::IntRect(0, 0, 227, 152));
+	SMenu_start.setPosition(427, 130);
+
+	bool start = false;
+	bool option = false;
+	bool menu_is_open = true;
+
+	while (menu_is_open)
+	{
+
+		start = false;
+		option = false;
+
+		if (sf::IntRect(435, 146, 191, 49).contains(sf::Mouse::getPosition(window))) { start = true; }
+		if (sf::IntRect(451, 216, 159, 49).contains(sf::Mouse::getPosition(window))) { option = true; }
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			if (sf::IntRect(435, 146, 191, 49).contains(sf::Mouse::getPosition(window))) { menu_is_open = false;}
+			//if (sf::IntRect(451, 216, 159, 49).contains(sf::Mouse::getPosition(window))) {  }
+		}
+		
+
+		//закриття вікна і виход з циклу
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.clear();
+		window.draw(Smenu);
+		if (start)  window.draw(SMenu_start);
+		if (option) window.draw(Smenu_option);
+		window.display();
 	}
 }
 
