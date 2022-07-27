@@ -16,11 +16,15 @@ Ufo::Ufo(std::string file_name, int image_coordinate_x, int image_coordinate_y, 
 void Ufo::movement(float time)
 {
 	time /= speed_movement;
+	float tmp_X = position_X;
+	float tmp_Y = position_Y;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))  { position_X -=  time;  }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { position_X +=  time;  }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))    { position_Y -=  time;  }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))  { position_Y += time;   }
 
+	if (position_X <= 0 || position_X >= 3000) position_X = tmp_X; //!!!!!!!! 3000 ³ רמ צו חא צטפנט
+	if (position_Y <= 0 || position_Y >= 2000) position_Y = tmp_Y;  //!!!!!!! 2000 ?
 	Sprite_Player.setPosition(position_X, position_Y);
 }
 
@@ -34,14 +38,25 @@ bool Ufo::collision(float x, float y)
 	return false;
 }
 
-float Ufo::Get_pos_Y() const
+//float Ufo::Get_pos_Y() const
+//{
+//	return (position_Y);
+//}
+//
+//float Ufo::Get_pos_X() const
+//{
+//	return (position_X);
+//}
+
+float Ufo::Get_pos_window_Y() const
 {
-	return (position_Y);
+	//Sprite_Player.
+	return 0.0f;
 }
 
-float Ufo::Get_pos_X() const
+float Ufo::Get_pos_window_X() const
 {
-	return (position_X);
+	return 0.0f;
 }
 
 

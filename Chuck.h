@@ -9,7 +9,8 @@ class Chuck : public Object
 {
 public:
 	Chuck(std::string file_name, int image_coordinate_x, int image_coordinate_y, int image_width, int image_height,
-		int distance_animation, int number_frames, float direction_X, float direction_Y, float position_X, float position_Y);
+		int distance_animation, int number_frames, float direction_X, float direction_Y, float position_X, float position_Y,
+		float windov_width, float windov_height);
 
 	void movement(float time);
 	bool collision(float x, float y);//!!!!!!!!!!!!!!

@@ -10,8 +10,11 @@ public:
 	
 	 void movement(float time);//!!!!!!!!!!!
      bool collision(float x, float y);
-	 float Get_pos_Y()const;
-	 float Get_pos_X()const;
+	 //float Get_pos_Y()const;
+	 //float Get_pos_X()const;
+
+	 float Get_pos_window_Y()const;
+	 float Get_pos_window_X()const;
 
 	 void set_pos_target(float target_X, float target_Y) {};////!!!!! ошибка виправити
 private:

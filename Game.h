@@ -15,10 +15,10 @@ class Game
 {
 private:
 
+	sf::View view;
 
 	sf::Texture Tbackground;
 	sf::Sprite Sprite_Tbackground;
-
 
 	std::string Dust_name = ("images/Ufos.png");
 	std::string Ufo_nam = ("images/ufo.png");
@@ -42,10 +42,10 @@ private:
 	std::list<Player*> player;
 
 	static constexpr double radians_to_degrees = 57.2958;// зробити доступним усім класам
-	const unsigned int windov_width = 1300;
-	const unsigned int windov_height = 900;
+	const unsigned int windov_width = 1000;
+	const unsigned int windov_height = 563;
 
-    int number_opponents=0;
+    int number_opponents = 0;
 	int recharge = 300;
 	int create_opponents = 1000; 
 	int number_of_fps = 60;
@@ -65,8 +65,15 @@ private:
 	Information_window Iw{};
 
     void Menu_overview();
+
+	void Set_coord_viev(float x, float y) {view.setCenter(x, y);}
+	void spawn_dust();//spawn_dust(std::string name1)
+	void updata(float time);
+	void collision();//(std::string name1, std::string name2);
+
+	Ufo* uf;
 public:
-	Game(int number_opponents=5);
+	Game(int number_opponents=500);
 	void Run();
 	
 };
