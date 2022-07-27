@@ -37,7 +37,9 @@ private:
 	sf::Sound explosion;
 	sf::Music music;
 
+	//std::list<Player*> object;
 	std::list<Object*> object;
+	std::list<Player*> player;
 
 	static constexpr double radians_to_degrees = 57.2958;// зробити доступним усім класам
 	const unsigned int windov_width = 1300;
@@ -62,10 +64,11 @@ private:
 
 	Information_window Iw{};
 
+    void Menu_overview();
 public:
 	Game(int number_opponents=5);
 	void Run();
-	void Menu_overview();
+	
 };
 
 

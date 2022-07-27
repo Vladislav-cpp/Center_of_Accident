@@ -40,7 +40,8 @@ void Game::Run()
 	
 		//створення обєкта класа Ufo в центрі вікна 
 		Ufo* uf = new Ufo(Ufo_nam, 2, 2, 97, 97, 100, 20, pos_spawn_ufo_X, pos_spawn_ufo_Y);
-		object.push_back(uf);
+		//object.push_back(uf);
+		player.push_back(uf);
 
 		//створення обєктив класа Dust в рандомних позиціях по окружності
 		for (int number_Dust = 0; number_Dust < number_opponents; number_Dust++)
@@ -51,15 +52,11 @@ void Game::Run()
 			respawn_dust_y = windov_height / 2 + radius_spawn_dust_Y * sin(tmp_angle_R * radians_to_degrees);
 
 			Dust* d = new Dust(Dust_name, 0, 0, 151, 134, 151, 4, respawn_dust_x, respawn_dust_y, uf->Get_position_X(), uf->Get_position_Y());
-			object.push_back(d);
+			//object.push_back(d);
+			player.push_back(d);
 
 		}
 
-		//створення обєктив класа Picture  (інформаційного вікна)
-		//Picture life_ufo();
-	//	Picture coin_ufo(Tcoin,0,0,15,15,16,8);
-        // coin_ufo.Set_position_XY(10,10);
-         
 
 	music.play();
 	music.setLoop(true);
@@ -83,41 +80,66 @@ void Game::Run()
 				respawn_dust_y = windov_height / 2 + radius_spawn_dust_Y * sin(tmp_angle_R * radians_to_degrees);
 
 				Dust* d = new Dust(Dust_name, 0, 0, 151, 134, 151, 4, respawn_dust_x, respawn_dust_y, uf->Get_position_X(), uf->Get_position_Y());
-				object.push_back(d);
-				
+				//object.push_back(d);
+				player.push_back(d);
+
 				clock_create_opponents.restart();
 			}
 			
 
 		
 
-		//визов фун-члена movement та перевірка колізії усіх обєктив які є в листі
-		for (auto i = object.begin(); i != object.end();i++)
-		{	
-			Object* e = *i;
-			//if (e->Get_name() == "Chuck")
-			e->movement(time);
+		//визов фун-члена movement 
+		
+		for (auto o = object.begin(); o != object.end();o++)
+			{
+			   Object* tmp_o = *o;
+			   tmp_o->movement(time);
+			}
+
+		for (auto p = player.begin(); p != player.end(); p++)
+		{
+			Player* tmp_p = *p;
+			if (tmp_p->Get_name() == "Dust")
+			tmp_p->set_pos_target(uf->Get_position_X(), uf->Get_position_Y());
+				
+			tmp_p->movement(time);
+		}
+
+
+
+		// перевірка колізії обєктив Ufo і Dust
+		for (auto p = player.begin(); p != player.end(); p++)
+		{
+			Player* tmp_pu = *p;
 
 			// перевірка колізії обєктив Ufo і Dust
-			if (e->Get_name() == "Ufo")
-				for (auto i : object)
-					if (i->Get_name() == "Dust")
-						if (e->collision(i->Get_position_X(), i->Get_position_Y()))
+			//if (tmp_pu->Get_name() == "Ufo")
+			//	for (auto tmp_pd : object)
+					if (tmp_pu->Get_name() == "Dust")
+						if (uf->collision(tmp_pu->Get_position_X(), tmp_pu->Get_position_Y()))
 						{
-							Iw.change_life();//віднвмаєм хп убиваєм портивника
-							i->Set_life(false);
+							Iw.change_life();//віднiмаєм хп убиваєм портивника
+							tmp_pu->Set_life(false);
 							//e->Set_life(0);//!!!!!!!!!!!!!!!!
 							//explosion.play(); !!!!!!!!!!!!!!!
 						}
+		}
 
-            // перевірка колізії обєктив Chuck і Dust
-			if (e->Get_name() == "Chuck")
+        // перевірка колізії обєктив Chuck і Dust
+		for (auto o = object.begin(); o != object.end(); o++)
+		for (auto p = player.begin(); p != player.end(); p++)
+		{
+			Object* tmp_o = *o;
+			Player* tmp_p = *p;
+
+			if (tmp_o->Get_name() == "Chuck")
 				for (auto i : object)
-					if (i->Get_name() == "Dust")
-						if (i->collision(e->Get_position_X(), e->Get_position_Y()))
+					if (tmp_p->Get_name() == "Dust")
+						if (tmp_p->collision(tmp_o->Get_position_X(), tmp_o->Get_position_Y()))
 						{
-							i->Set_life(false);
-							e->Set_life(false);
+							tmp_o->Set_life(false);
+							tmp_p->Set_life(false);
 							explosion.play();
 						}
 		}
@@ -137,19 +159,33 @@ void Game::Run()
 		}
 
         //видалення обєктів які знищєні та підрахунок очків класа Iw
-        for (auto i = object.begin(); i != object.end();)
+        for (auto o = object.begin(); o != object.end();)
         {
-        	Object* e = *i;
-        	if  ( false == e->Get_life() )
+			Object* tmp_o = *o;
+        	if  ( false == tmp_o->Get_life() )
 			{ 							
-				if (e->Get_name() == "Dust")
+				if (tmp_o->Get_name() == "Dust")
 				Iw.add_points();
 
-				i = object.erase(i); delete e;
+				o = object.erase(o); delete tmp_o;
 
 			}
-        	else i++;
+        	else o++;
         }
+
+		for (auto p = player.begin(); p != player.end();)
+		{
+			Player* tmp_p = *p;
+			if (false == tmp_p->Get_life())
+			{
+				if (tmp_p->Get_name() == "Dust")
+					Iw.add_points();
+
+				p = player.erase(p); delete tmp_p;
+
+			}
+			else p++;
+		}
 
 		window.clear();
 		window.draw(Sprite_Tbackground);
@@ -164,11 +200,18 @@ void Game::Run()
 		}
 
 		//аніміровання та отрисовка всіх обєктів 
-		for (auto i : object) 
+		for (auto o : object) 
 		{
-			i->animation(time);
-			i->draw(window);
+			o->animation(time);
+			o->draw(window);
         }
+
+		for (auto p : player)
+		{
+			p->animation(time);
+			p->draw(window);
+		}
+
 		//аніміровання та отрисовка інформаційного вікнa
 		Iw.animation(time);
 		Iw.draw(window);
@@ -196,6 +239,11 @@ void Game::Menu_overview()
 	sf::Sprite SMenu_start;	SMenu_start.setTexture(TMenu_start);
 	SMenu_start.setTextureRect(sf::IntRect(0, 0, 227, 152));
 	SMenu_start.setPosition(427, 130);
+
+	sf::Music music_for_the_menu;
+	music_for_the_menu.openFromFile("sound and music/music for the menu.ogg");
+	music_for_the_menu.play();
+	music_for_the_menu.setLoop(true);
 
 	bool start = false;
 	bool option = false;

@@ -1,11 +1,14 @@
 #include "Picture.h"
 
-Picture::Picture(std::string file_name, int x, int y, int w, int h, int distance_to_sprite, int number_frames)
-	: x(x), y(y), w(w), h(h), distance_to_sprite(distance_to_sprite), current_frame(0), number_frames(number_frames)
+Picture::Picture(std::string file_name, int image_coordinate_x, int image_coordinate_y, 
+	int image_width, int image_height, int distance_animation, int number_frames)
+
+	: image_coordinate_x(image_coordinate_x), image_coordinate_y(image_coordinate_y), 
+	image_width(image_width), image_height(image_height), distance_animation(distance_animation), current_frame(0), number_frames(number_frames)
 {
 	Texture_Player.loadFromFile(file_name);
 	Sprite_Player.setTexture(Texture_Player);
-	Sprite_Player.setTextureRect(sf::IntRect(x, y, w, h));
+	Sprite_Player.setTextureRect(sf::IntRect(image_coordinate_x, image_coordinate_y, image_width, image_height));
 
 }
 
@@ -15,7 +18,7 @@ void Picture::animation(int time)
 
 	if (current_frame >= number_frames)  current_frame = 0;
 
-	Sprite_Player.setTextureRect(sf::IntRect(x + static_cast<int>(current_frame) * distance_to_sprite, y, w, h));
+	Sprite_Player.setTextureRect(sf::IntRect(image_coordinate_x + static_cast<int>(current_frame) * distance_animation, image_coordinate_y, image_width, image_height));
 }
 
 
