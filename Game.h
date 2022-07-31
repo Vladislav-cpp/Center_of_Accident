@@ -17,12 +17,8 @@ private:
 
 	sf::View view;
 
-	sf::Texture Tbackground;
-	sf::Sprite Sprite_Tbackground;
-
-	std::string Dust_name = ("images/Ufos.png");
-	std::string Ufo_nam = ("images/ufo.png");
-	std::string Chuck_nam = ("images/14.png");
+	sf::Texture Tbackground;//-
+	sf::Sprite Sprite_Tbackground;//-
 
 	sf::Clock clock;
 	sf::Clock clock_recharge;
@@ -30,14 +26,14 @@ private:
 
 	sf::Cursor cursor;
 
-	sf::SoundBuffer shotBuffer;
-	sf::Sound shoot;
+  sf::SoundBuffer shotBuffer;//-	
+  sf::Sound shoot;//-
 
-	sf::SoundBuffer explosionBuffer;
-	sf::Sound explosion;
-	sf::Music music;
+  
+	sf::SoundBuffer explosionBuffer;//-
+	sf::Sound explosion;//-
+	sf::Music music;//-
 
-	//std::list<Player*> object;
 	std::list<Object*> object;
 	std::list<Player*> player;
 
@@ -75,6 +71,7 @@ private:
 public:
 	Game(int number_opponents=500);
 	void Run();
+	//+ void setings(args...)
 	
 };
 

@@ -2,20 +2,19 @@
 #include <iostream>
 
 
-Chuck::Chuck(std::string file_name, int image_coordinate_x, int image_coordinate_y, int image_width, int image_height,
-	int distance_animation, int number_frames,float direction_X, float direction_Y, float position_X, float position_Y 
-	,float windov_width,float windov_height)
+Chuck::Chuck(float direction_X, float direction_Y, float position_X,
+	float position_Y ,float windov_width,float windov_height)
 
-	:Object(file_name, image_coordinate_x, image_coordinate_y, image_width, image_height, distance_animation, number_frames,
+	:Object("Chuck", "images/14.png", 29, 46, 182, 50, 0, 0,
 		position_X, position_Y)
 {
 
-	name = "Chuck";
+	//name = "Chuck";
 	Sprite_Player.setScale(sf::Vector2f(0.2f, 0.2f));
 
 	
 
-	Sprite_Player.setOrigin(0, image_height/2);
+	Sprite_Player.setOrigin(0, 23);
 
 
 	std::cout << "direction_X - " << direction_X << "\n"

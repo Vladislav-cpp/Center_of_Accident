@@ -8,11 +8,13 @@
 class Object :public Picture
 {
 public:
-	Object(std::string file_name, int image_coordinate_x, int image_coordinate_y, int image_width, int image_height,
+	Object(std::string object_name, std::string file_name, int image_coordinate_x,
+		int image_coordinate_y, int image_width, int image_height,
 		int distance_animation, int number_frames,float position_X, float position_Y)
 
-		:life(true), position_X(position_X), position_Y(position_Y), 
-		Picture(file_name, image_coordinate_x, image_coordinate_y,  image_width, image_height, distance_animation, number_frames)
+		:life(true), position_X(position_X), position_Y(position_Y), name(object_name),
+		Picture(file_name, image_coordinate_x, image_coordinate_y, 
+			image_width, image_height, distance_animation, number_frames)
 	{}
 
 
@@ -29,11 +31,11 @@ protected:
 	float position_X;
 	float position_Y;
 
-	std::string name;
+	
 
 private:
 	bool life;
-
+   std::string name;
 };
 
 

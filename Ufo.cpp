@@ -1,13 +1,15 @@
 #include "Ufo.h"
 
-Ufo::Ufo(std::string file_name, int image_coordinate_x, int image_coordinate_y, int image_width, int image_height,
-	int distance_animation, int number_frames, float position_X, float position_Y)
+//Ufo::ufo(std::string file_name, int image_coordinate_x, int image_coordinate_y, int image_width, int image_height,
+//	int distance_animation, int number_frames, float position_x, float position_y)
 
-	:Player(file_name, image_coordinate_x, image_coordinate_y, image_width, image_height, distance_animation, number_frames,
-		position_X, position_Y)
+	Ufo::Ufo(float pos_spawn_ufo_X, float pos_spawn_ufo_Y)
+
+	: Player(std::string("Ufo"), std::string("images/ufo.png"),
+		2, 2, 97, 97, 100, 20, pos_spawn_ufo_X, pos_spawn_ufo_Y)
 {
 	animation_speed = 0.04;
-	name = "Ufo";
+	//name = "Ufo";
 	Sprite_Player.setOrigin(48,48);
 	Sprite_Player.setPosition(position_X, position_Y);
 }
@@ -50,7 +52,6 @@ bool Ufo::collision(float x, float y)
 
 float Ufo::Get_pos_window_Y() const
 {
-	//Sprite_Player.
 	return 0.0f;
 }
 
@@ -58,47 +59,3 @@ float Ufo::Get_pos_window_X() const
 {
 	return 0.0f;
 }
-
-
-//Ufo::Ufo(std::string file_name, int x, int y, int w, int h, int distance_to_sprite, int count, float pos_spawn_X, float pos_spawn_Y)
-//	:Player(file_name, x, y, w, h, distance_to_sprite, count)
-//{
-//	position_X = pos_spawn_X;
-//	position_Y = pos_spawn_Y;
-//	animation_speed = 0.04;
-//	name = "Ufo";
-//	Sprite_Player.setOrigin(48, 48);
-//	Sprite_Player.setPosition(position_X, position_Y);
-//}
-//
-//
-//void Ufo::movement(float time)
-//{
-//	time /= speed_movement;
-//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) { position_X -= time; }
-//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { position_X += time; }
-//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) { position_Y -= time; }
-//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) { position_Y += time; }
-//
-//	Sprite_Player.setPosition(position_X, position_Y);
-//}
-//
-//bool Ufo::collision(float x, float y)
-//{
-//
-//
-//
-//	if (pow(x - position_X, 2) + pow(y - position_Y, 2) <= 8000)
-//		return true;
-//	return false;
-//}
-//
-//float Ufo::Get_pos_Y() const
-//{
-//	return (position_Y);
-//}
-//
-//float Ufo::Get_pos_X() const
-//{
-//	return (position_X);
-//}

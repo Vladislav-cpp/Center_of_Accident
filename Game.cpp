@@ -23,7 +23,7 @@ Game::Game(int number_opponents) :window(sf::VideoMode(windov_width, windov_heig
 
 	view.reset(sf::FloatRect(0,0, windov_width, windov_height));
 
-  uf = new Ufo(Ufo_nam, 2, 2, 97, 97, 100, 20, pos_spawn_ufo_X, pos_spawn_ufo_Y);
+  uf = new Ufo(pos_spawn_ufo_X, pos_spawn_ufo_Y);
   player.push_back(uf);
 
 }
@@ -37,23 +37,6 @@ void Game::Run()
 		 clock.restart();
 		 clock_recharge.restart();
 		 clock_create_opponents.restart();
-
-	
-		//створення обєкта класа Ufo в центрі вікна 
-		//Ufo* uf = new Ufo(Ufo_nam, 2, 2, 97, 97, 100, 20, pos_spawn_ufo_X, pos_spawn_ufo_Y);
-		//player.push_back(uf);
-		//створення обєктив класа Dust в рандомних позиціях по окружності
-		//for (int number_Dust = 0; number_Dust < number_opponents; number_Dust++)
-		//{
-		 //
-		//	int tmp_angle_R = rand() % 360;
-		//	respawn_dust_x = windov_width / 2 + radius_spawn_dust_X * cos(tmp_angle_R * radians_to_degrees);
-		//	respawn_dust_y = windov_height / 2 + radius_spawn_dust_Y * sin(tmp_angle_R * radians_to_degrees);
-		 //
-		//	Dust* d = new Dust(Dust_name, 0, 0, 151, 134, 151, 4, respawn_dust_x, respawn_dust_y, uf->Get_position_X(), uf->Get_position_Y());
-		//	player.push_back(d);
-		 //
-		//}
 
 
 	music.play();
@@ -124,13 +107,11 @@ void Game::Run()
 			{
 				sf::Vector2i position = sf::Mouse::getPosition(window);
 
-				Chuck* ch = new Chuck(Chuck_nam, 29, 46, 182, 50, 0, 0, 
-					position.x, position.y, uf->Get_position_X(), uf->Get_position_Y(),windov_width/2,  windov_height/2);
-
+				Chuck* ch = new Chuck(position.x, position.y, uf->Get_position_X(), uf->Get_position_Y(),windov_width/2,  windov_height/2);
 				object.push_back(ch);
 				shoot.play();
 
-				clock_recharge.restart();
+				clock_recharge.restart(); 
 			}
 		}
 
@@ -275,7 +256,7 @@ void Game::spawn_dust()
 			respawn_dust_y = windov_height/2 + radius_spawn_dust_Y * sin(tmp_angle_R * radians_to_degrees);
 
 
-			Dust* d = new Dust(Dust_name, 0, 0, 151, 134, 151, 4, respawn_dust_x, respawn_dust_y, uf->Get_position_X(), uf->Get_position_Y());
+			Dust* d = new Dust(respawn_dust_x, respawn_dust_y, uf->Get_position_X(), uf->Get_position_Y());
 			player.push_back(d);
 			clock_create_opponents.restart();
 		}
